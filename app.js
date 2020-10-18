@@ -4,8 +4,9 @@ const bodyParser = require("body-parser");
 const app = express();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
-let items = [];
+let items = ["Buy Food","Eat Food"];
 
 app.get("/", (req, res) => {
     var today = new Date();

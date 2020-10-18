@@ -5,21 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Do do List</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
+    <div class="box" id="heading">
+        <h1><%= currentDay %></h1>
+    </div>
 
-   <h1><%= currentDay %></h1>
-   <form action="/" method="POST">
-<label for="new">enter task</label>
-<input type="text" name="new">
-<button type="submit">Add</button>
-   </form>
-   <ul>
-    <% items.forEach(element => {%> 
-    <li> <%= element %> </li>
-    <% }) %> 
-</ul>
+    <div class="box">
+        <% items.forEach(element => {%>
+        <div class="item">
+            <input type="checkbox">
+            <p> <%= element %><p>
+            </div>
+            <% }) %>
+
+            <form class="item" action="/" method="POST">
+                <input type="text" name="new" placeholder="New Item" autocomplete="off">
+                <button type="submit">+</button>
+            </form>
+
+    </div>
+
+
+ 
 </body>
 
 </html>
