@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do do List</title>
+</head>
+
+<body>
+
+   <h1><%= currentDay %></h1>
+   <form action="/" method="POST">
+<label for="new">enter task</label>
+<input type="text" name="new">
+<button type="submit">Add</button>
+   </form>
+   <ul>
+    <% items.forEach(element => {%> 
+    <li> <%= element %> </li>
+    <% }) %> 
+</ul>
+</body>
+
+</html>
