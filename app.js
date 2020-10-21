@@ -46,7 +46,6 @@ app.get("/", (req, res) => {
 
     Item.find(function (err, foundItem) {
 
-        console.log(foundItem);
         if (foundItem.length === 0) {
             Item.insertMany(defaultItems, err => { if (err) { console.log(err) } })
             res.redirect("/");
@@ -67,6 +66,7 @@ app.post("/", (req, res) => {
         name: itemName
     })
 
+
     if (listName === "Today") {
         item.save();
         res.redirect("/");
@@ -77,10 +77,6 @@ app.post("/", (req, res) => {
             res.redirect("/" + foundList.name);
         })
     }
-
-
-
-
 })
 
 app.post("/delete", (req, res) => {
@@ -90,7 +86,6 @@ app.post("/delete", (req, res) => {
     if (listName === "Today") {
         Item.deleteOne({ _id: delItemId }, err => {
             if (!err) {
-                console.log(err)
                 res.redirect('/')
             }
         })
@@ -98,13 +93,9 @@ app.post("/delete", (req, res) => {
         List.findOneAndUpdate({name:listName}, {$pull:{items:{_id: delItemId}}}, (err, foundList)=>{
             if(!err){
                 res.redirect('/' + listName);
-
             }
         })
-
-
     }
-
 })
 
 
@@ -117,14 +108,14 @@ app.get("/:customListName", (req, res) => {
     })
 
     List.findOne({ name: customListName }, (err, results) => {
-        if (err) { console.log(err) }
-
-        if (!results) {
-            list.save();
-            res.redirect("/" + customListName);
-        }
-        else {
-            res.render("list", { listTitle: customListName, items: results.items })
+        if (!err) {
+            if (!results) {
+                list.save();
+                res.redirect("/" + customListName);
+            }
+            else {
+                res.render("list", { listTitle: customListName, items: results.items })
+            }
         }
     })
 })
